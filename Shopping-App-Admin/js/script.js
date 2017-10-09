@@ -11,7 +11,6 @@ $("document").ready(function() {
 
         if( sessionStorage.getItem('currentProductId') != null) {
             var id = sessionStorage.getItem('currentProductId');
-            console.log(id);
             var url = "https://api.mlab.com/api/1/databases/shopping-app/collections/products/" + id + "?apiKey=UHnVJJl--aPfvjDlGLVNsFvbeysWuSbG"; 
             var type = "PUT";
         }
@@ -47,9 +46,7 @@ $("document").ready(function() {
         $('#product-category').val($(this).data('category'));
         $('#product-price').val($(this).data('price'));
         $('#product-description').val($(this).data('description'));
-        $('#the-button').val('Update Product');
-
-        
+        $('#the-button').val('Update Product');  
     });
 
     $('body').on('click', '#delete-product', function(event){
@@ -71,10 +68,6 @@ $("document").ready(function() {
                 console.log(err)
             }
         });
-    });
-
-    $("#update-product").on("click", function() {
-        $('html,body').animate({scrollTop: $(this).offset().top}, 800);
     });
 });
 

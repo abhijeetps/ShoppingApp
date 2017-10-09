@@ -4,6 +4,7 @@ $('document').ready(function() {
     var output = '';
 
     $('body').on('click', '#add-to-cart', function(event){
+        
         event.preventDefault();
         var thisProduct = {
             productId: $(this).data('id'),
@@ -16,6 +17,8 @@ $('document').ready(function() {
         inCart.push(thisProduct);
         output = '';
         totalSum = 0;
+
+        $('#my-cart-list').html('');
 
         for (var i = 0; i < inCart.length; i++) {
             totalSum += inCart[i].productPrice;
@@ -54,6 +57,7 @@ $('document').ready(function() {
 
     $('body').on('click', '#remove-from-cart', function(event){
         event.preventDefault();
+        
         for(var i = 0; i < inCart.length; i++) {
             if(inCart[i].productId == $(this).data('id')) {
                 totalSum -= inCart[i].productPrice;
@@ -96,30 +100,14 @@ $('document').ready(function() {
         $('#my-cart-list').html(output);
     });
 
-    $('#my-cart-tab').click(function(event){
-        event.preventDefault();
-        var cartList = '';
-
-        if(!(inCart.length > 0)){
-            cartList += `
-            <div class="mdl-cell mdl-cell--2-col"></div>
-            <div class="mdl-cell mdl-cell--8-col">
-                <span class="fa fa-shopping-cart fa-3x" style="margin: 20px 20px 20px 20px;"></span><br/>
-                Your Shopping Cart is empty. <br/>
-                Your Shopping Cart lives to serve. Give it purpose - fill it with books, CDs, videos, DVDs, electronics, and more.
-            </div>
-            <div class="mdl-cell mdl-cell--2-col"></div>
-            `;
-        }
-        $('#my-cart-list').html(cartList);
-    });
-
     $('#checkout-tab').click(function(event){
         event.preventDefault();
 
         var bill = '';
 
         if(inCart.length > 0){
+            $('#checkout-bill').html('');
+            
             bill += `
             <div class="mdl-cell mdl-cell--2-col"></div>
             <div class="mdl-cell mdl-cell--8-col">
@@ -140,20 +128,8 @@ $('document').ready(function() {
             </div>
             <div class="mdl-cell mdl-cell--2-col"></div>
             `;    
+            $('#checkout-bill').html(bill);
         }
-        else {
-            bill += `
-                <div class="mdl-cell mdl-cell--2-col"></div>
-                <div class="mdl-cell mdl-cell--8-col">
-                    <span class="fa fa-paper-plane-o fa-3x" style="margin: 20px 20px 20px 20px;"></span><br/>
-                    Can't proceed to checkout. Your cart is empty. <br/>
-                    Please add products to your cart to proceed for checkout.
-                </div>
-                <div class="mdl-cell mdl-cell--2-col"></div>
-            `;
-
-        }
-        $('#checkout-bill').html(bill);
     });
 });
 
